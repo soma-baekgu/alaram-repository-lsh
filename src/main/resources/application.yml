@@ -5,6 +5,20 @@ spring:
   kafka:
     bootstrap-servers: ["localhost:29092"]
 
+  datasource:
+    url: jdbc:mysql://localhost:13306/push
+    username: root
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+
   mail:
     host: smtp.gmail.com
     port: 587
