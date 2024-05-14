@@ -30,7 +30,7 @@ class PushRegisterService(
     }
 
     @Transactional
-    @Scheduled(fixedDelay = 6000)
+    @Scheduled(fixedDelay = 300_000)
     fun enqueue(){
         val periodReservation: List<ReservedPushRegister> =
             reservedPushRegisterRepository.getNotCommitedPeriodReservation(
