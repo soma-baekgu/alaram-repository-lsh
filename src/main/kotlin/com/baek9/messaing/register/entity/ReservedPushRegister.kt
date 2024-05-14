@@ -1,5 +1,6 @@
 package com.baek9.messaing.register.entity
 
+import com.baek9.messaing.register.dto.EmailForm
 import jakarta.persistence.*
 import jakarta.persistence.GenerationType.*
 import lombok.AccessLevel.*
@@ -26,5 +27,20 @@ class ReservedPushRegister(
     val message: String,
 
     @Column
-    val atTime: LocalDateTime
-)
+    val atTime: LocalDateTime,
+
+    @Column
+    var commited: Boolean = false
+) {
+    override fun toString(): String {
+        return "{$atTime, $title, $message}"
+    }
+
+    fun toEmailForm(): EmailForm {
+        return EmailForm(title, message, email)
+    }
+
+    fun commit(){
+        this.commited = true
+    }
+}
