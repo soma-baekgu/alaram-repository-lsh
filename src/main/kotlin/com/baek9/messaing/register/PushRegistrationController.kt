@@ -1,6 +1,7 @@
 package com.baek9.messaing.register
 
 import com.baek9.messaing.register.dto.EmailForm
+import com.baek9.messaing.register.dto.ReservedEmailForm
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
@@ -19,5 +20,11 @@ class PushRegistrationController(
     fun register(@RequestBody emailForm: EmailForm) : ResponseEntity<Boolean> {
         log.info("push alert to {}", emailForm.email)
         return ResponseEntity.ok(pushRegisterService.sendUrgently(emailForm))
+    }
+
+    @PostMapping("/reserved")
+    fun registerReserved(@RequestBody reservedEmailForm: ReservedEmailForm) : ResponseEntity<Boolean> {
+        log.info("reserved push alert at {}", reservedEmailForm.atTime)
+        return ResponseEntity.ok(pushRegisterService.reservePushAlert(reservedEmailForm))
     }
 }

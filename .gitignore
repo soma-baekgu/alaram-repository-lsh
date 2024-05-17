@@ -40,3 +40,6 @@ out/
 .kotlin
 
 ./src/*-dev.yml
+.env
+mysql-data
+kafka-data

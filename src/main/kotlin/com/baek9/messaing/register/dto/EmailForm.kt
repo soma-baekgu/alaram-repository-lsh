@@ -3,7 +3,7 @@ package com.baek9.messaing.register.dto
 import lombok.Getter
 
 @Getter
-data class EmailForm(
+open class EmailForm(
     val title: String,
     val message: String,
     val email : String

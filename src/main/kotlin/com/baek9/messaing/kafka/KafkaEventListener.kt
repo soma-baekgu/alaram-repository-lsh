@@ -15,8 +15,20 @@ class KafkaEventListener (
 ) {
     val log = LoggerFactory.getLogger(KafkaEventListener::class.java)
 
-    @KafkaListener(groupId = "group001", topics = ["urgent"])
-    fun consumer(
+    @KafkaListener(groupId = "group001", topics = ["urgent", "reserved"])
+    fun urgentConsumer1(
+        record: ConsumerRecord<String, EmailForm>,
+        ack: Acknowledgment,
+        consumer: Consumer<String, EmailForm>
+    ) {
+        log.info("{}", record.value())
+
+        emailSender.send(record.value().email, record.value().title, record.value().message)
+        ack.acknowledge()
+    }
+
+    @KafkaListener(groupId = "group001", topics = ["urgent", "reserved"])
+    fun urgentConsumer2(
         record: ConsumerRecord<String, EmailForm>,
         ack: Acknowledgment,
         consumer: Consumer<String, EmailForm>
