@@ -1,6 +1,6 @@
-package com.baek9.messaing.kafka
+package com.baek9.core.kafka
 
-import com.baek9.messaing.register.dto.EmailForm
+import com.baek9.core.register.dto.EmailForm
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue

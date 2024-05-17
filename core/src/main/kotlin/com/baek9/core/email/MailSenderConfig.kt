@@ -1,4 +1,4 @@
-package com.baek9.messaing.email
+package com.baek9.core.email
 
 import lombok.Getter
 import org.springframework.beans.factory.annotation.Value

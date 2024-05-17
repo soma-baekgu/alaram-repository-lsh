@@ -1,9 +1,9 @@
-package com.baek9.messaing.register
+package com.baek9.core.register
 
-import com.baek9.messaing.kafka.KafkaEventListener
-import com.baek9.messaing.register.dto.EmailForm
-import com.baek9.messaing.register.dto.ReservedEmailForm
-import com.baek9.messaing.register.entity.ReservedPushRegister
+import com.baek9.core.kafka.KafkaEventListener
+import com.baek9.core.register.dto.EmailForm
+import com.baek9.core.register.dto.ReservedEmailForm
+import com.baek9.core.register.entity.ReservedPushRegister
 import jakarta.transaction.Transactional
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.core.KafkaTemplate

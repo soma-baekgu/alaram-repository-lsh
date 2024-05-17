@@ -1,10 +1,10 @@
-package com.baek9.messaing
+package com.baek9.core
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class MessaingApplicationTests {
+class CoreApplicationTests {
 
     @Test
     fun contextLoads() {

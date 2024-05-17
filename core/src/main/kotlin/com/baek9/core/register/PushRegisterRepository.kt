@@ -1,6 +1,6 @@
-package com.baek9.messaing.register
+package com.baek9.core.register
 
-import com.baek9.messaing.register.entity.ReservedPushRegister
+import com.baek9.core.register.entity.ReservedPushRegister
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import java.time.LocalDateTime

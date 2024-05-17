@@ -1,6 +1,6 @@
-package com.baek9.messaing.register.entity
+package com.baek9.core.register.entity
 
-import com.baek9.messaing.register.dto.EmailForm
+import com.baek9.core.register.dto.EmailForm
 import jakarta.persistence.*
 import jakarta.persistence.GenerationType.*
 import lombok.AccessLevel.*

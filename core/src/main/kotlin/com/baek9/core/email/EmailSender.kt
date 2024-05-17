@@ -1,4 +1,4 @@
-package com.baek9.messaing.email
+package com.baek9.core.email
 
 import org.springframework.mail.SimpleMailMessage
 import org.springframework.mail.javamail.JavaMailSender

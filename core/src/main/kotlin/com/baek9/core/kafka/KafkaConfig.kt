@@ -1,4 +1,4 @@
-package com.baek9.messaing.kafka
+package com.baek9.core.kafka
 
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.producer.ProducerConfig

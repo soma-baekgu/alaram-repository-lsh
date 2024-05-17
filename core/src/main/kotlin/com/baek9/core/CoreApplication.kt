@@ -1,4 +1,4 @@
-package com.baek9.messaing
+package com.baek9.core
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -6,8 +6,8 @@ import org.springframework.scheduling.annotation.EnableScheduling
 
 @EnableScheduling
 @SpringBootApplication
-class MessaingApplication
+class CoreApplication
 
 fun main(args: Array<String>) {
-    runApplication<MessaingApplication>(*args)
+    runApplication<CoreApplication>(*args)
 }

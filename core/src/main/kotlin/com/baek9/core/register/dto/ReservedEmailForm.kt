@@ -1,6 +1,6 @@
-package com.baek9.messaing.register.dto
+package com.baek9.core.register.dto
 
-import com.baek9.messaing.register.entity.ReservedPushRegister
+import com.baek9.core.register.entity.ReservedPushRegister
 import lombok.Getter
 import java.time.LocalDateTime
 

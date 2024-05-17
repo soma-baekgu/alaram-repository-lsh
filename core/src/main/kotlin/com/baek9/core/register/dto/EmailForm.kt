@@ -1,4 +1,4 @@
-package com.baek9.messaing.register.dto
+package com.baek9.core.register.dto
 
 import lombok.Getter
 
