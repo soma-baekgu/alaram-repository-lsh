@@ -1,6 +1,5 @@
-package com.baek9.core.register.entity
+package com.baek9.domain.register
 
-import com.baek9.core.register.dto.EmailForm
 import jakarta.persistence.*
 import jakarta.persistence.GenerationType.*
 import lombok.AccessLevel.*
@@ -34,10 +33,6 @@ class ReservedPushRegister(
 ) {
     override fun toString(): String {
         return "{$atTime, $title, $message}"
-    }
-
-    fun toEmailForm(): EmailForm {
-        return EmailForm(title, message, email)
     }
 
     fun commit(){

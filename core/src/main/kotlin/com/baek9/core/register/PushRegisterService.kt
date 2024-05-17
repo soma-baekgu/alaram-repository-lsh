@@ -1,9 +1,9 @@
 package com.baek9.core.register
 
+import com.baek9.domain.register.ReservedPushRegister
 import com.baek9.core.kafka.KafkaEventListener
 import com.baek9.core.register.dto.EmailForm
 import com.baek9.core.register.dto.ReservedEmailForm
-import com.baek9.core.register.entity.ReservedPushRegister
 import jakarta.transaction.Transactional
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.core.KafkaTemplate
@@ -40,7 +40,7 @@ class PushRegisterService(
         periodReservation
             .forEach{ r ->
                 log.info("record {}", r)
-                kafkaTemplate.send("reserved", r.toEmailForm().toString())
+                kafkaTemplate.send("reserved", EmailForm.from(r).toString())
                 r.commit()
             }
 
