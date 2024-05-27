@@ -32,7 +32,7 @@ class ReservedPushRegister(
     var commited: Boolean = false
 ) {
     override fun toString(): String {
-        return "{$atTime, $title, $message}"
+        return "{ \"title\": \"$title\", \"message\": \"$message\", \"email\": \"$email\" }"
     }
 
     fun commit(){

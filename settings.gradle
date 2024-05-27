@@ -2,4 +2,4 @@
 rootProject.name = 'messaing'
 include 'core'
 include 'domain'
-
+include 'batch'
