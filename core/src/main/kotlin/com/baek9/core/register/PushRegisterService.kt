@@ -7,9 +7,7 @@ import com.baek9.domain.email.EmailForm
 import jakarta.transaction.Transactional
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.core.KafkaTemplate
-import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
-import java.time.LocalDateTime
 
 @Service
 class PushRegisterService(
@@ -27,24 +25,5 @@ class PushRegisterService(
     fun reservePushAlert(reservedEmailForm: ReservedEmailForm): Boolean? {
         val reservedPush: ReservedPushRegister = reservedPushRegisterRepository.save(reservedEmailForm.toEntity())
         return true
-    }
-
-    @Transactional
-    @Scheduled(fixedDelay = 300_000)
-    fun enqueue(){
-        val periodReservation: List<ReservedPushRegister> =
-            reservedPushRegisterRepository.getNotCommitedPeriodReservation(
-                LocalDateTime.now(),
-                LocalDateTime.now().plusMinutes(5))
-
-        periodReservation
-            .forEach{ r ->
-                log.info("record {}", r)
-                kafkaTemplate.send("reserved", EmailForm.from(r).toString())
-                r.commit()
-            }
-
-
-        log.info("records {}", periodReservation)
     }
 }
