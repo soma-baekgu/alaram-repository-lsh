@@ -1,5 +1,6 @@
 package com.baek9.batch.batch
 
+import com.baek9.domain.email.EmailForm
 import com.baek9.domain.register.ReservedPushRegister
 import jakarta.persistence.EntityManagerFactory
 import org.slf4j.LoggerFactory
@@ -12,11 +13,13 @@ import org.springframework.batch.core.step.builder.StepBuilder
 import org.springframework.batch.item.database.JpaCursorItemReader
 import org.springframework.batch.item.database.JpaItemWriter
 import org.springframework.batch.item.database.builder.JpaCursorItemReaderBuilder
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.orm.jpa.JpaTransactionManager
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 @Configuration
@@ -24,7 +27,7 @@ class ReservedPushRegisterJobConfiguration(
     val jobRepository: JobRepository,
     val entityManagerFactory: EntityManagerFactory,
     val transactionManger: JpaTransactionManager,
-    val kafkaTemplate: KafkaTemplate<String, String>
+    val kafkaTemplate: KafkaTemplate<String, EmailForm>
 ) {
     val log = LoggerFactory.getLogger(ReservedPushRegisterJobConfiguration::class.java)
 
@@ -34,9 +37,10 @@ class ReservedPushRegisterJobConfiguration(
 
     @Bean
     @StepScope
-    fun reader(): JpaCursorItemReader<ReservedPushRegister> {
-        // TODO : 변수화
-        val now = LocalDateTime.now()
+    fun reader(
+        @Value("#{jobParameters['time']}") time: String? = ""
+    ): JpaCursorItemReader<ReservedPushRegister> {
+        val now = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
         log.info("now {}", now)
 
         return JpaCursorItemReaderBuilder<ReservedPushRegister>()
@@ -45,12 +49,11 @@ class ReservedPushRegisterJobConfiguration(
             .queryString(
                 "select r " +
                     "from ReservedPushRegister r " +
-                    "where r.atTime < :current and r.atTime >= :prev " +
+                    "where r.atTime < :current " +
                     "and r.commited = false"
             )
             .parameterValues(
-                mapOf("current" to now,
-                    "prev" to now.minusMinutes(5))
+                mapOf("current" to now)
             )
             .build()
     }
@@ -71,7 +74,7 @@ class ReservedPushRegisterJobConfiguration(
     fun step(): Step {
         return StepBuilder("step", jobRepository)
             .chunk<ReservedPushRegister, ReservedPushRegister>(CHUNK_SIZE, transactionManger)
-            .reader(reader())
+            .reader(reader(null))
             .processor(processor())
             .writer(writer())
             .build()
