@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+
+    environment {
+        PASSWORD = 'EMAIL_PASSWORD'
+        USERNAME = 'SENDER_EMAIL'
+        MYSQL_PASSWORD = 'MYSQL_PASSWORD'
+    }
+
+    triggers {
+        cron('H/5 * * * *')
+    }
+
+    stages {
+        stage('batch run') {
+            steps {
+                script {
+                    def currentTime = new Date().format("yyyy-MM-dd HH:mm:ss")
+                    sh "java -Dkafka.bootstrap-server=kafka:9092 -jar batch-0.0.2-SNAPSHOT.jar time=\"${currentTime}\""
+                }
+            }
+        }
+    }
+}
