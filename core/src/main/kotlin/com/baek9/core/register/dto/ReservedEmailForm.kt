@@ -1,5 +1,6 @@
 package com.baek9.core.register.dto
 
+import com.baek9.domain.email.EmailForm
 import com.baek9.domain.register.ReservedPushRegister
 import lombok.Getter
 import java.time.LocalDateTime

@@ -1,7 +1,7 @@
 package com.baek9.core.kafka
 
-import com.baek9.core.register.dto.EmailForm
 import com.baek9.core.email.EmailSender
+import com.baek9.domain.email.EmailForm
 import org.apache.kafka.clients.consumer.Consumer
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.slf4j.LoggerFactory

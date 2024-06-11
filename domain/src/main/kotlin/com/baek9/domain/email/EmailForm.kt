@@ -1,9 +1,7 @@
-package com.baek9.core.register.dto
+package com.baek9.domain.email
 
 import com.baek9.domain.register.ReservedPushRegister
-import lombok.Getter
 
-@Getter
 open class EmailForm(
     val title: String,
     val message: String,

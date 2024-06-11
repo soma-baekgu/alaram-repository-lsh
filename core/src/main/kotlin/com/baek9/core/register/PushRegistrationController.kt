@@ -1,7 +1,7 @@
 package com.baek9.core.register
 
-import com.baek9.core.register.dto.EmailForm
 import com.baek9.core.register.dto.ReservedEmailForm
+import com.baek9.domain.email.EmailForm
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
