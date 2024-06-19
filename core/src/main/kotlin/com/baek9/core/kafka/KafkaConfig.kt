@@ -31,6 +31,7 @@ class KafkaConfig {
         props[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = bootstrapServer
         props[ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG] = EmailFormDeserializer::class.java
         props[ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG] = EmailFormDeserializer::class.java
+        props[ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG] = false
 
         return props
     }
@@ -40,25 +41,6 @@ class KafkaConfig {
         return DefaultKafkaConsumerFactory(consumerConfig())
     }
 
-    @Bean
-    fun producerConfig() : Map<String, Any> {
-        val props: HashMap<String, Any> = HashMap()
-        props[ProducerConfig.BOOTSTRAP_SERVERS_CONFIG] = bootstrapServer
-        props[ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG] = StringSerializer::class.java
-        props[ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG] = StringSerializer::class.java
-
-        return props
-    }
-
-    @Bean
-    fun producerFactory() : ProducerFactory<String, String> {
-        return DefaultKafkaProducerFactory(producerConfig())
-    }
-
-    @Bean
-    fun kafkaTemplate() : KafkaTemplate<String, String> {
-        return KafkaTemplate(producerFactory())
-    }
 
     @Bean
     fun kafkaListenerContainerFactory() :
@@ -66,8 +48,6 @@ class KafkaConfig {
     {
         val factory: ConcurrentKafkaListenerContainerFactory<String, String> = ConcurrentKafkaListenerContainerFactory()
         factory.consumerFactory = consumerFactory()
-        factory.setConcurrency(2)
-        factory.containerProperties.ackMode = ContainerProperties.AckMode.MANUAL_IMMEDIATE
 
         return factory
     }

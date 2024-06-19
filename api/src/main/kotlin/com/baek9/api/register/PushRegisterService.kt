@@ -1,8 +1,7 @@
-package com.baek9.core.register
+package com.baek9.api.register
 
 import com.baek9.domain.register.ReservedPushRegister
-import com.baek9.core.kafka.KafkaEventListener
-import com.baek9.core.register.dto.ReservedEmailForm
+import com.baek9.api.register.dto.ReservedEmailForm
 import com.baek9.domain.email.EmailForm
 import jakarta.transaction.Transactional
 import org.slf4j.LoggerFactory
@@ -11,13 +10,13 @@ import org.springframework.stereotype.Service
 
 @Service
 class PushRegisterService(
-    val kafkaTemplate: KafkaTemplate<String, String>,
+    val kafkaTemplate: KafkaTemplate<String, EmailForm>,
     val reservedPushRegisterRepository: PushRegisterRepository
 ) {
-    val log = LoggerFactory.getLogger(KafkaEventListener::class.java)
+    val log = LoggerFactory.getLogger(PushRegisterService::class.java)
 
     fun sendUrgently(emailForm: EmailForm) : Boolean {
-        kafkaTemplate.send("urgent", emailForm.toString())
+        kafkaTemplate.send("alert", "urgent", emailForm)
         return true
     }
 

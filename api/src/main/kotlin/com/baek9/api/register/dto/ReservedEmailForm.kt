@@ -1,4 +1,4 @@
-package com.baek9.core.register.dto
+package com.baek9.api.register.dto
 
 import com.baek9.domain.email.EmailForm
 import com.baek9.domain.register.ReservedPushRegister

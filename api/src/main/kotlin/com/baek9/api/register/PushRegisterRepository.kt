@@ -1,4 +1,4 @@
-package com.baek9.core.register
+package com.baek9.api.register
 
 import com.baek9.domain.register.ReservedPushRegister
 import org.springframework.data.jpa.repository.JpaRepository

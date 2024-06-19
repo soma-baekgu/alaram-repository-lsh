@@ -1,6 +1,6 @@
-package com.baek9.core.register
+package com.baek9.api.register
 
-import com.baek9.core.register.dto.ReservedEmailForm
+import com.baek9.api.register.dto.ReservedEmailForm
 import com.baek9.domain.email.EmailForm
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity

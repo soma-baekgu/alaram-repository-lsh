@@ -7,6 +7,7 @@ import org.springframework.batch.item.ItemProcessor
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.kafka.support.SendResult
 import java.util.concurrent.CompletableFuture
+import java.util.concurrent.CompletionException
 
 class EmailProcessor(
     val kafkaTemplate: KafkaTemplate<String, EmailForm>
@@ -16,11 +17,16 @@ class EmailProcessor(
     override fun process(item: ReservedPushRegister): ReservedPushRegister {
         val future: CompletableFuture<SendResult<String, EmailForm>> =
             kafkaTemplate.send("alert", "reserved", EmailForm.from(item))
-        future.join()
 
-        log.info("processing {}", item.toString())
+        try{
+            future.join()
+            log.info("processing {}", item.toString())
+            // TODO 이렇게 하는게 적합한지 모르겠음
+            item.commit()
+        } catch (e: CompletionException){
+            log.error("Failed reservedPushRegister id={}", item.id)
+        }
 
-        item.commit()
         return item
     }
 }

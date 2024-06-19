@@ -1,8 +1,7 @@
-package com.baek9.batch.kafka
+package com.baek9.api.kafka
 
 import com.baek9.domain.email.EmailForm
 import org.apache.kafka.clients.producer.ProducerConfig
-import org.apache.kafka.clients.producer.internals.StickyPartitionCache
 import org.apache.kafka.common.serialization.StringSerializer
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value

@@ -1,4 +1,4 @@
-package com.baek9.batch.kafka
+package com.baek9.api.kafka
 
 import org.apache.kafka.clients.producer.Partitioner
 import org.apache.kafka.common.Cluster
