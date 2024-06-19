@@ -43,4 +43,3 @@ out/
 .env
 mysql-data
 kafka-data
-jenkins-data

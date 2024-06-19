@@ -18,6 +18,7 @@ services:
       - zookeeper
     ports:
       - "29092:29092"
+      - "9092:9092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
@@ -40,3 +41,18 @@ services:
     volumes:
       - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./mysql-data:/var/lib/mysql
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    environment:
+      - TZ=Asia/Seoul
+    user: root
+    privileged: true
+    ports:
+      - 8090:8080
+      - 50000:50000
+    volumes:
+      - ./jenkins-data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./batch/build/libs:/var/jenkins_home/workspace/reserved-push-batch

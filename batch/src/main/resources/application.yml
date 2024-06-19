@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: batch
+
+  kafka:
+    bootstrap-servers: ["localhost:29092", "kafka:29092"]
+
+  datasource:
+    url: jdbc:mysql://localhost:13306/push
+    username: root
+    password: ${MYSQL_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+  jpa:
+    database: mysql
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+
+  batch:
+    jdbc:
+      initialize-schema: always
+
+
+kafka:
+  bootstrap-server: "127.0.0.1:29092"
+logging:
+  level:
+    org.hibernate.orm.jdbc.bind: trace
